@@ -1,0 +1,269 @@
+CRSCTL Commands :-
+
+Cluster Related Commands
+crs_stat t	 Shows HA resource status (hard to read)
+crsstat	Output of crs_stat t formatted nicely
+crsctl check crs	CSS,CRS,EVM appears healthy
+crsctl stop crs	Stop crs and all other services
+crsctl disable crs	Prevents CRS from starting on reboot
+crsctl enable crs	Enables CRS start on reboot
+crs_stop all	Stops all registered resources
+crs_start all	Starts all registered resources
+crsctl stop cluster -all	Stops the cluster in all nodes
+crsctl start cluster -all	Starts the cluster in all nodes
+
+SRVCTL Commands :-
+
+Database Related Commands
+
+
+srvctl start instance -d <db_name>  -i <inst_name>	Starts an instance
+srvctl start database -d <db_name>	Starts all instances
+srvctl stop database -d <db_name>	Stops all instances, closes database
+srvctl stop instance -d <db_name> -i <inst_name>	Stops an instance
+srvctl start service -d <db_name> -s <service_name>	Starts a service
+srvctl stop service -d <db_name> -s <service_name>	Stops a service
+srvctl status service -d <db_name>	Checks status of a service
+srvctl status instance -d <db_name> -i <inst_name>	Checks an individual instance
+srvctl status database -d  <db_name>	Checks status of all instances
+srvctl start nodeapps -n  <node_name>	Starts gsd, vip, listener, and ons
+srvctl stop nodeapps -n  <node_name>	Stops gsd, vip and listener
+srvctl status scan	Status of scan listener
+srvctl config scan	Configuration of scan listener
+srvctl status asm	Status of ASM instance
+
+
+
+Query to check rman backup status:-
+
+col STATUS format a10
+col hrs format 999.99
+select SESSION_KEY, INPUT_TYPE, STATUS,to_char(START_TIME,'mm/dd/yy hh24:mi') start_time,
+to_char(END_TIME,'mm/dd/yy hh24:mi') end_time,elapsed_seconds/3600 hrs from V$RMAN_BACKUP_JOB_DETAILS
+order by session_key;
+Output
+
+Linux Comands
+==============
+
+49 Linux Commands Every DevOps Engineer Should Have in Their Back Pocket
+
+System Intelligence:
+• htop - Like top, but actually useful
+• df -h - Because disk space issues find you
+• netstat -tulpn - Your network's story
+• lsof - What's using that port?
+• ps aux | grep - Finding that runaway process
+• dmesg - Kernel's gossip channel
+
+File Operations:
+• find . -name - Your file search superhero
+• tar -xvf - Unzip like a pro
+• rsync - scp's smarter cousin
+• sed -i - Stream editing wizard
+• awk - Text manipulation magic
+• grep -r - Find text like a detective
+
+Container Life:
+• docker stats - Container vital signs
+• docker logs -f - Live container stories
+• crictl pods - Kubernetes container whisperer
+• kubectl get pods - K8s status check
+
+Monitoring Magic:
+• tail -f - Log watching party
+• watch - Command on repeat
+• vmstat - Memory tales
+• iostat - Disk performance poetry
+
+Network Ninja:
+• curl -v - HTTP storyteller
+• nc - Network swiss army knife
+• dig - DNS detective
+• ss - Socket statistics
+
+Security Stuff:
+• chmod - Permission painter
+• chown - Ownership wizard
+• openssl - Certificate craftsman
+• ssh-keygen - Key creator
+
+Process Control:
+• systemctl - Service sorcery
+• journalctl - Log time machine
+• kill -9 - Process terminator
+• nice - Priority painter
+
+Performance Profiling:
+• strace - System call spy
+• tcpdump - Network packet poet
+• sar - System activity reporter
+• perf - Performance profiler
+
+Text Wrangling:
+• cut -d - Column collector
+• sort | uniq -c - Pattern finder
+• tr - Character changer
+• wc -l - Line counter
+
+File System:
+• du -sh - Directory size detective
+• fdisk -l - Disk detective
+• mount - filesystem connector
+• ln -s - Symlink sorcerer
+
+Shell Shortcuts:
+• history | grep - Command time machine
+• !! - Last command replay
+• ctrl+r - Reverse search magic
+• alias - Command shortcut creator
+
+Miscellaneous Mastery:
+• tee - Output splitter
+• xargs - Command multiplier
+• at - Job scheduler
+• screen/tmux - Terminal multiplexer
+
+Which commands do you use most? 
+
+
+
+
+
+
+
+Kubernetes Commands
+=====================
+
+🔧 Kubernetes Commands for DevOps Engineers 🚀
+
+🔹 Cluster Management:
+
+# Check cluster info
+kubectl cluster-info
+
+# Get all nodes
+kubectl get nodes
+
+# Describe a node
+kubectl describe node <node-name>
+
+# Check cluster health
+kubectl get componentstatuses
+
+🔹 Namespaces:
+
+# List all namespaces
+kubectl get namespaces
+
+# Create a namespace
+kubectl create namespace <namespace-name>
+
+# Delete a namespace
+kubectl delete namespace <namespace-name>
+
+🔹 Pods:
+
+# List all pods in the default namespace
+kubectl get pods
+
+# List pods in a specific namespace
+kubectl get pods -n <namespace>
+
+# Describe a pod
+kubectl describe pod <pod-name>
+
+# Delete a pod
+kubectl delete pod <pod-name>
+
+🔹 Deployments:
+
+# List all deployments
+kubectl get deployments
+
+# Create a deployment
+kubectl create deployment <deployment-name> --image=<image-name>
+
+# Update a deployment
+kubectl set image deployment/<deployment-name> <container-name>=<new-image>
+
+# Scale a deployment
+kubectl scale deployment <deployment-name> --replicas=<number>
+
+# Delete a deployment
+kubectl delete deployment <deployment-name>
+
+🔹 Services:
+
+# List all services
+kubectl get services
+
+# Create a service
+kubectl expose deployment <deployment-name> --type=<type> --port=<port>
+
+# Describe a service
+kubectl describe service <service-name>
+
+# Delete a service
+kubectl delete service <service-name>
+
+🔹 ConfigMaps & Secrets:
+
+# List all ConfigMaps
+kubectl get configmaps
+
+# Create a ConfigMap
+kubectl create configmap <configmap-name> --from-literal=<key>=<value>
+
+# List all Secrets
+kubectl get secrets
+
+# Create a Secret
+kubectl create secret generic <secret-name> --from-literal=<key>=<value>
+
+🔹 Persistent Volumes & Claims:
+
+# List all persistent volumes
+kubectl get pv
+
+# List all persistent volume claims
+kubectl get pvc
+
+# Create a persistent volume
+kubectl apply -f <persistent-volume-definition>.yaml
+
+# Create a persistent volume claim
+kubectl apply -f <persistent-volume-claim-definition>.yaml
+
+🔹 Logs & Monitoring:
+
+# View logs of a pod
+kubectl logs <pod-name>
+
+# View logs of a specific container in a pod
+kubectl logs <pod-name> -c <container-name>
+
+# Stream logs of a pod
+kubectl logs -f <pod-name>
+
+🔹 Troubleshooting:
+
+# Get events
+kubectl get events
+
+# Describe a resource
+kubectl describe <resource-type> <resource-name>
+
+# Exec into a pod
+kubectl exec -it <pod-name> -- /bin/bash
+
+🔹 Custom Resources:
+
+# List custom resource definitions
+kubectl get crd
+
+# Describe a custom resource
+kubectl describe crd <custom-resource-name>
+
+
+Do share it with your network♻️
